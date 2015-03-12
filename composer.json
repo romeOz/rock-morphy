@@ -1,0 +1,36 @@
+{
+    "name": "romeoz/rock-morphy",
+    "description": "Morphy module for Rock Framework",
+    "keywords": ["phpmorphy"],
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "email": "serggalka@gmail.com",
+        "issues": "https://github.com/romeOz/rock-morphy/issues",
+        "source": "https://github.com/romeOz/rock-morphy"
+    },
+    "authors": [
+        {
+            "name": "Ruslan",
+            "email": "serggalka@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "romeoz/rock-base" : "0.10.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "rock\\morphy\\": "src/"
+        },
+        "files": ["src/phpmorphy/src/common.php"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.10-dev"
+        }
+    }
+}
