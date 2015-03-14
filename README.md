@@ -1,6 +1,8 @@
 Morphy module for [Rock Framework](https://github.com/romeOz/rock)
 =================
 
+Morphological analyzer library for search and other. Abstraction over the [phpMorphy](https://github.com/heromantor/phpmorphy).
+
 [![Build Status](https://travis-ci.org/romeOz/rock-morphy.svg?branch=master)](https://travis-ci.org/romeOz/rock-morphy)
 [![HHVM Status](http://hhvm.h4cc.de/badge/romeoz/rock-morphy.svg)](http://hhvm.h4cc.de/package/romeoz/rock-morphy)
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-morphy/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-morphy?branch=master)
