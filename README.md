@@ -12,6 +12,7 @@ Requirements
 -------------------
  * **PHP 5.4+**
  * [Download binary dictionaries](http://sourceforge.net/projects/phpmorphy/files/phpmorphy-dictionaries/0.3.x/).
+
 > Dictionary `en` is available by default.
 
 License
