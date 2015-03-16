@@ -13,7 +13,7 @@ class PHPMorphyTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->morphy = new PHPMorphy(['locale' => 'ru']);
+        $this->morphy = new PHPMorphy(['pathDict' => '@rockunit/data/dicts/', 'locale' => 'ru']);
     }
 
     public function testInflectionalForms()

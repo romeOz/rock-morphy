@@ -2,6 +2,7 @@
 namespace rock\morphy;
 
 
+use rock\base\Alias;
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
 
@@ -14,13 +15,18 @@ class PHPMorphy implements ObjectInterface
     protected static $morphy;
     public $highlightTpl = '<span class="highlight">$1</span>';
     public $locale = 'en';
+    public $pathDict;
 
     public function init()
     {
         if (!isset(static::$morphy)) {
+            if (!isset($this->pathDict)) {
+                $this->pathDict = __DIR__ . '/dicts/';
+            }
+            $this->pathDict = Alias::getAlias($this->pathDict);
             try {
 
-                $dictBundle    = new \phpMorphy_FilesBundle(__DIR__ . '/phpmorphy/dicts/', $this->getLang());
+                $dictBundle    = new \phpMorphy_FilesBundle($this->pathDict, $this->getLang());
                 static::$morphy = new \phpMorphy(
                     $dictBundle,
                     [
