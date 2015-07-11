@@ -58,6 +58,6 @@ class PHPMorphyTest extends \PHPUnit_Framework_TestCase
     public function testHighlight()
     {
         $expected = 'привет, <span class="highlight">мир</span>! и он был голубь <span class="highlight">мира</span>';
-        $this->assertSame($expected, $this->morphy->highlight('мир','привет, мир! и он был голубь мира'));
+        $this->assertSame($expected, $this->morphy->highlight('мир', 'привет, мир! и он был голубь мира'));
     }
 }

@@ -26,14 +26,14 @@ class PHPMorphy implements ObjectInterface
             $this->pathDict = Alias::getAlias($this->pathDict);
             try {
 
-                $dictBundle    = new \phpMorphy_FilesBundle($this->pathDict, $this->getLang());
+                $dictBundle = new \phpMorphy_FilesBundle($this->pathDict, $this->getLang());
                 static::$morphy = new \phpMorphy(
                     $dictBundle,
                     [
-                        'storage'           => PHPMORPHY_STORAGE_FILE,
-                        'with_gramtab'      => false,
+                        'storage' => PHPMORPHY_STORAGE_FILE,
+                        'with_gramtab' => false,
                         'predict_by_suffix' => true,
-                        'predict_by_db'     => true
+                        'predict_by_db' => true
                     ]
                 );
             } catch (\Exception $e) {
@@ -135,7 +135,7 @@ class PHPMorphy implements ObjectInterface
      * Highlight words
      *
      * @param string $word query of search
-     * @param string $content      content
+     * @param string $content content
      * @return string
      */
     public function highlight($word, $content)
