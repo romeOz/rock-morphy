@@ -20,7 +20,7 @@
         "romeoz/rock-base" : "*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "~4.7.0"
     },
     "autoload": {
         "psr-4": {
