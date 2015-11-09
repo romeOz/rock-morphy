@@ -50,7 +50,7 @@ class PHPMorphy implements ObjectInterface
                     ]
                 );
             } catch (\Exception $e) {
-                throw new MorphyException($e->getMessage(), [], $e);
+                throw new MorphyException($e->getMessage(), [], 0, $e);
             }
         }
     }
