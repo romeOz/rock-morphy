@@ -23,7 +23,7 @@ class PHPMorphy implements ObjectInterface
      * Path to dictionaries.
      * @var string
      */
-    protected $pathDict = __DIR__ . '/dicts/';
+    protected $pathDict;
     /**
      * Default locale.
      * @var string
@@ -34,7 +34,9 @@ class PHPMorphy implements ObjectInterface
     public function init()
     {
         if (!isset(static::$morphy)) {
-
+            if (!isset($this->pathDict)) {
+                $this->pathDict = __DIR__ . '/dicts/';
+            }
             try {
 
                 $dictBundle = new \phpMorphy_FilesBundle($this->pathDict, $this->normalizeLocale());
