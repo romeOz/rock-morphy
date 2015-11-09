@@ -9,24 +9,35 @@ use rock\base\ObjectTrait;
 class PHPMorphy implements ObjectInterface
 {
     use ObjectTrait;
+
     /**
      * @var \phpMorphy
      */
     protected static $morphy;
-    public $highlightTpl = '<span class="highlight">$1</span>';
-    public $locale = 'en';
-    public $pathDict;
+    /**
+     * Highlight template.
+     * @var string
+     */
+    protected $highlightTpl = '<span class="highlight">$1</span>';
+    /**
+     * Path to dictionaries.
+     * @var string
+     */
+    protected $pathDict = __DIR__ . '/dicts/';
+    /**
+     * Default locale.
+     * @var string
+     */
+    protected $locale = 'en';
+
 
     public function init()
     {
         if (!isset(static::$morphy)) {
-            if (!isset($this->pathDict)) {
-                $this->pathDict = __DIR__ . '/dicts/';
-            }
-            $this->pathDict = Alias::getAlias($this->pathDict);
+
             try {
 
-                $dictBundle = new \phpMorphy_FilesBundle($this->pathDict, $this->getLang());
+                $dictBundle = new \phpMorphy_FilesBundle($this->pathDict, $this->normalizeLocale());
                 static::$morphy = new \phpMorphy(
                     $dictBundle,
                     [
@@ -42,10 +53,41 @@ class PHPMorphy implements ObjectInterface
         }
     }
 
+    /**
+     * Sets a locale.
+     * @param string $locale
+     * @return $this
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = strtolower($locale);
+        return $this;
+    }
 
     /**
-     * Returns base form.
-     *
+     * Sets a highlight template.
+     * @param string $highlightTpl
+     * @return $this
+     */
+    public function setHighlightTpl($highlightTpl)
+    {
+        $this->highlightTpl = $highlightTpl;
+        return $this;
+    }
+
+    /**
+     * Sets a path to dictionaries.
+     * @param string $pathDict
+     * @return $this
+     */
+    public function setPathDict($pathDict)
+    {
+        $this->pathDict = Alias::getAlias($pathDict);
+        return $this;
+    }
+
+    /**
+     * Returns base form on word.
      * @param string $content
      * @return string|null
      */
@@ -55,7 +97,7 @@ class PHPMorphy implements ObjectInterface
             return null;
         }
         $words = preg_replace(['/\[.*\]/isu', '/[^\w\x7F-\xFF\s]/i'], "", trim($content));
-        $words = preg_replace('/ +/', ' ', $words); /* убираем двойные пробелы */
+        $words = preg_replace('/ +/', ' ', $words);
         //preg_match_all('/[a-zA-Z]+/iu',mb_strtoupper($words, CHARSET),$words_latin);
         //$words_latin = (is_array($words_latin) && count($words_latin) > 0) ? ' '.implode(' ', $words_latin[0]) : '';
         $words = preg_split('/\s|[,.:;!?"\'()]/', $words, -1, PREG_SPLIT_NO_EMPTY);
@@ -93,7 +135,6 @@ class PHPMorphy implements ObjectInterface
 
     /**
      * Returns word inflectional forms.
-     *
      * @param string $content
      * @return array
      */
@@ -130,12 +171,10 @@ class PHPMorphy implements ObjectInterface
         //return $res.$words_latin;
     }
 
-
     /**
-     * Highlight words
-     *
-     * @param string $word query of search
-     * @param string $content content
+     * Highlight words.
+     * @param string $word query of search.
+     * @param string $content content.
      * @return string
      */
     public function highlight($word, $content)
@@ -164,7 +203,7 @@ class PHPMorphy implements ObjectInterface
         );
     }
 
-    protected function getLang()
+    protected function normalizeLocale()
     {
         $this->locale = strtolower($this->locale);
         if ($this->locale == 'ru' || $this->locale == 'ru_ru') {
